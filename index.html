@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poppies | Modern Urban Dining in Nairobi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --surface-color: #1a1a1a;
+            --accent-color: #ff4d00;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+            }
+            .nav-links a {
+                color: var(--text-primary);
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: var(--transition);
+            }
+            .nav-links a:hover {
+                color: var(--accent-color);
+            }
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+
+        /* About Section */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title .underline {
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 0 auto;
+        }
+
+        #about p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Menu Section */
+        #menu {
+            background-color: var(--surface-color);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .menu-header h3 {
+            font-size: 1.25rem;
+        }
+
+        .price {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .menu-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-item span {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1001;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">POPPIES</a>
+            <div class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="https://wa.me/254700000000?text=Hi%20Poppies!%20I'd%20like%20to%20place%20an%20order." class="btn btn-primary" style="padding: 8px 16px; font-size: 0.8rem;">Order Now</a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="reveal">Urban Flavors,<br>Nairobi Soul.</h1>
+                <p class="reveal">Experience the perfect blend of contemporary urban cuisine and authentic local ingredients at the heart of the city.</p>
+                <div class="reveal">
+                    <a href="https://wa.me/254700000000?text=Hi%20Poppies!%20I'd%20like%20to%20place%20an%20order." class="btn btn-primary">Order on WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our Story</h2>
+                <div class="underline"></div>
+            </div>
+            <p class="reveal">Founded in the vibrant streets of Nairobi, Poppies is more than just a restaurant. It's a culinary journey designed for the urban explorer. We believe in bold flavors, fresh local produce, and a dining experience that feels as alive as the city itself. Whether you're here for a quick bite or a celebratory feast, we welcome you to the family.</p>
+        </div>
+    </section>
+
+    <section id="menu">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>The Menu</h2>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-item reveal">
+                    <div class="menu-header">
+                        <h3>The Poppies Burger</h3>
+                        <span class="price">KES 850</span>
+                    </div>
+                    <p>Juicy 200g beef patty, caramelized onions, melted cheddar, and our signature Poppies secret sauce on a toasted brioche bun.</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-item reveal">
+                    <div class="menu-header">
+                        <h3>Peri Peri Quarter Chicken</h3>
+                        <span class="price">KES 650</span>
+                    </div>
+                    <p>Flame-grilled chicken marinated for 24 hours in authentic African bird's eye chili, served with a side of slaw.</p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-item reveal">
+                    <div class="menu-header">
+                        <h3>Loaded Nairobi Fries</h3>
+                        <span class="price">KES 550</span>
+                    </div>
+                    <p>Crispy masala chips topped with seasoned minced meat, melted mozzarella, jalapeños, and fresh coriander.</p>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-item reveal">
+                    <div class="menu-header">
+                        <h3>Vegetarian Bliss Bowl</h3>
+                        <span class="price">KES 750</span>
+                    </div>
+                    <p>Organic quinoa, roasted seasonal veggies, creamy avocado, chickpeas, and a zesty lime tahini dressing.</p>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="menu-item reveal">
+                    <div class="menu-header">
+                        <h3>Urban Wings (6pcs)</h3>
+                        <span class="price">KES 600</span>
+                    </div>
+                    <p>Succulent chicken wings tossed in your choice of Sticky Honey BBQ or our signature Spicy Buffalo sauce.</p>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="menu-item reveal">
+                    <div class="menu-header">
+                        <h3>Nyama Choma Platter</h3>
+                        <span class="price">KES 1,200</span>
+                    </div>
+                    <p>Traditional slow-roasted goat meat, seasoned with sea salt, served with kachumbari and a side of ugali or chips.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Find Us</h2>
+                <div class="underline"></div>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info reveal">
+                    <h3>Get in Touch</h3>
+                    <p>Have a question or want to book a table for a group? Reach out to us directly.</p>
+                    
+                    <div class="info-item">
+                        <span>Location:</span>
+                        <p>Kenyatta Avenue, CBD, Nairobi, Kenya</p>
+                    </div>
+                    <div class="info-item">
+                        <span>Phone:</span>
+                        <p>+254 700 000 000</p>
+                    </div>
+                    <div class="info-item">
+                        <span>Hours:</span>
+                        <p>Mon - Sat: 10:00 AM - 10:00 PM<br>Sun: 12:00 PM - 8:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="contact-cta reveal">
+                    <h3>Instant Ordering</h3>
+                    <p>Skip the queue and order directly via WhatsApp. Fast delivery within the CBD and Westlands area.</p>
+                    <a href="https://wa.me/254700000000?text=Hi%20Poppies!%20I'd%20like%20to%20place%20an%20order." class="btn btn-primary">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Poppies Restaurant Nairobi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Icon for quick access -->
+    <a href="https://wa.me/254700000000" class="whatsapp-float" target="_blank">
+        <svg viewBox="0 0 32 32" width="32" height="32" fill="currentColor"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.481 2.025 7.788l-2.025 7.387 7.563-1.987c2.25 1.2 4.813 1.888 7.537 1.888 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.3c-2.487 0-4.813-0.65-6.85-1.787l-0.487-0.275-4.5 1.175 1.2-4.387-0.312-0.5c-1.25-2-1.963-4.375-1.963-6.913 0-7.113 5.8-12.9 12.913-12.9s12.9 5.8 12.9 12.9-5.787 12.888-12.9 12.888zM23.113 19.338c-0.387-0.2-2.287-1.125-2.637-1.262-0.362-0.125-0.613-0.2-0.875 0.2s-1 1.262-1.225 1.525-0.45 0.288-0.837 0.088c-0.387-0.2-1.637-0.6-3.125-1.925-1.15-1.025-1.925-2.287-2.15-2.675s-0.025-0.6 0.175-0.787c0.175-0.175 0.387-0.45 0.588-0.675s0.262-0.387 0.4-0.637 0.063-0.475-0.038-0.675c-0.088-0.2-0.875-2.113-1.2-2.9-0.312-0.775-0.637-0.675-0.875-0.688s-0.487-0.013-0.75-0.013c-0.262 0-0.688 0.1-1.05 0.488s-1.375 1.35-1.375 3.288 1.413 3.813 1.613 4.075c0.2 0.262 2.775 4.238 6.725 5.938 0.938 0.4 1.675 0.638 2.25 0.825 0.95 0.3 1.813 0.262 2.487 0.163 0.763-0.113 2.3-0.938 2.625-1.85s0.325-1.7 0.225-1.85c-0.1-0.15-0.362-0.238-0.75-0.438z"></path></svg>
+    </a>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
