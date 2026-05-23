@@ -78,10 +78,45 @@
             transform: translateY(-2px);
         }
 
+        /* Performance Optimizations */
+        img {
+            content-visibility: auto;
+        }
+
+        .blur-up {
+            filter: blur(10px);
+            transition: filter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .blur-up.loaded {
+            filter: blur(0);
+        }
+
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: transform, opacity;
+        }
+
+        /* Optimize animations for mobile */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .btn, .menu-item, .community-item img {
+                transition: none !important;
+                transform: none !important;
+            }
+        }
+
+        .menu-item, .signature-image, .community-item {
+            will-change: transform;
+        }
+
+        /* Glassmorphism Optimization */
+        .glass-panel {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            /* Prevents flickering on some mobile browsers */
+            transform: translateZ(0);
         }
 
         .reveal.active {
@@ -1069,37 +1104,37 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item reveal">
-                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800" alt="Restaurant Interior">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800" alt="Restaurant Interior">
                     <div class="gallery-overlay">
                         <h3>Industrial Elegance</h3>
                     </div>
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=800" alt="Delicious Food">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=800" alt="Delicious Food">
                     <div class="gallery-overlay">
                         <h3>Artisan Plates</h3>
                     </div>
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="https://images.unsplash.com/photo-1550966841-396ad88675c7?auto=format&fit=crop&q=80&w=800" alt="Fine Dining">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1550966841-396ad88675c7?auto=format&fit=crop&q=80&w=800" alt="Fine Dining">
                     <div class="gallery-overlay">
                         <h3>Intimate Evenings</h3>
                     </div>
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800" alt="Chef at work">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800" alt="Chef at work">
                     <div class="gallery-overlay">
                         <h3>Culinary Mastery</h3>
                     </div>
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&q=80&w=800" alt="Cocktails">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&q=80&w=800" alt="Cocktails">
                     <div class="gallery-overlay">
                         <h3>Signature Sips</h3>
                     </div>
                 </div>
                 <div class="gallery-item reveal">
-                    <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&q=80&w=800" alt="Outdoor Seating">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&q=80&w=800" alt="Outdoor Seating">
                     <div class="gallery-overlay">
                         <h3>Urban Escape</h3>
                     </div>
@@ -1118,7 +1153,7 @@
             <div class="signature-container reveal">
                 <div class="signature-image">
                     <span class="signature-badge">Chef Recommended</span>
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=1200" alt="Signature Dish">
+                    <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=1200" alt="Signature Dish">
                 </div>
                 <div class="signature-content">
                     <h3>The Midnight <br><span>Platter</span></h3>
@@ -1156,7 +1191,7 @@
                 <!-- Item 1: Burger -->
                 <div class="menu-item reveal" data-category="burgers">
                     <div class="menu-img">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800" alt="Poppies Burger">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800" alt="Poppies Burger">
                     </div>
                     <div class="menu-details">
                         <div class="menu-header">
@@ -1173,7 +1208,7 @@
                 <!-- Item 2: Grill -->
                 <div class="menu-item reveal" data-category="grill">
                     <div class="menu-img">
-                        <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&q=80&w=800" alt="Peri Peri Chicken">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&q=80&w=800" alt="Peri Peri Chicken">
                     </div>
                     <div class="menu-details">
                         <div class="menu-header">
@@ -1190,7 +1225,7 @@
                 <!-- Item 3: Specials -->
                 <div class="menu-item reveal" data-category="specials">
                     <div class="menu-img">
-                        <img src="https://images.unsplash.com/photo-1573082818143-2411245f229e?auto=format&fit=crop&q=80&w=800" alt="Loaded Nairobi Fries">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1573082818143-2411245f229e?auto=format&fit=crop&q=80&w=800" alt="Loaded Nairobi Fries">
                     </div>
                     <div class="menu-details">
                         <div class="menu-header">
@@ -1207,7 +1242,7 @@
                 <!-- Item 4: Grill -->
                 <div class="menu-item reveal" data-category="grill">
                     <div class="menu-img">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800" alt="Nyama Choma">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800" alt="Nyama Choma">
                     </div>
                     <div class="menu-details">
                         <div class="menu-header">
@@ -1221,7 +1256,7 @@
                 <!-- Item 5: Specials -->
                 <div class="menu-item reveal" data-category="specials">
                     <div class="menu-img">
-                        <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&q=80&w=800" alt="Urban Wings">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&q=80&w=800" alt="Urban Wings">
                     </div>
                     <div class="menu-details">
                         <div class="menu-header">
@@ -1238,7 +1273,7 @@
                 <!-- Item 6: Cocktails -->
                 <div class="menu-item reveal" data-category="cocktails">
                     <div class="menu-img">
-                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800" alt="Signature Cocktail">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800" alt="Signature Cocktail">
                     </div>
                     <div class="menu-details">
                         <div class="menu-header">
@@ -1266,21 +1301,21 @@
                 <div class="review-card reveal">
                     <p class="review-text">The Poppies Burger is easily the best burger I've had in Nairobi. The secret sauce is actually incredible!</p>
                     <div class="review-author">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="Customer">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="Customer">
                         <span>David M.</span>
                     </div>
                 </div>
                 <div class="review-card reveal">
                     <p class="review-text">Love the vibe and the peri peri chicken. Perfect spot for a weekend lunch with friends. Highly recommend!</p>
                     <div class="review-author">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="Customer">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="Customer">
                         <span>Sarah J.</span>
                     </div>
                 </div>
                 <div class="review-card reveal">
                     <p class="review-text">Ordered via WhatsApp and the delivery was super fast. The Loaded Fries arrived hot and crispy. 10/10.</p>
                     <div class="review-author">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100" alt="Customer">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100" alt="Customer">
                         <span>Kevin K.</span>
                     </div>
                 </div>
@@ -1295,28 +1330,28 @@
                 </div>
                 <div class="community-grid reveal">
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1573082818143-2411245f229e?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1573082818143-2411245f229e?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                     <div class="community-item">
-                        <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
+                        <img loading="lazy" class="blur-up" onload="this.classList.add('loaded')" src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&q=80&w=400" alt="Food Photo">
                     </div>
                 </div>
             </div>
