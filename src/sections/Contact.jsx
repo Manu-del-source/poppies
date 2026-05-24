@@ -3,6 +3,10 @@ import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, MessageSquare } from 'lucide-react'
 
 const Contact = ({ id }) => {
+  const whatsappNumber = "254726090372"
+  const whatsappText = encodeURIComponent("Hello I want to order")
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappText}`
+
   return (
     <section id={id} className="py-32 bg-poppies-bg">
       <div className="container mx-auto px-6">
@@ -55,23 +59,35 @@ const Contact = ({ id }) => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="glass-panel p-12 flex flex-col items-center justify-center text-center rounded-sm"
+            className="glass-panel p-12 flex flex-col items-center justify-center text-center rounded-sm relative overflow-hidden group/card"
           >
-            <div className="w-20 h-20 bg-poppies-accent/10 border border-poppies-accent/30 flex items-center justify-center rounded-full mb-8">
+            {/* Animated Background Glow */}
+            <motion.div 
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1]
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -top-20 -right-20 w-64 h-64 bg-poppies-accent rounded-full blur-[100px] pointer-events-none"
+            />
+
+            <div className="w-20 h-20 bg-poppies-accent/10 border border-poppies-accent/30 flex items-center justify-center rounded-full mb-8 relative z-10 group-hover/card:scale-110 transition-transform duration-500">
               <MessageSquare size={32} className="text-poppies-accent" />
             </div>
-            <h3 className="text-3xl font-black uppercase tracking-tight mb-4">Direct Ordering</h3>
-            <p className="text-poppies-secondary/60 mb-10 max-w-sm">
+            <h3 className="text-3xl font-black uppercase tracking-tight mb-4 relative z-10">Direct Ordering</h3>
+            <p className="text-poppies-secondary/60 mb-10 max-w-sm relative z-10">
               Experience the soul of Poppies at home. Message us directly for priority delivery in the CBD.
             </p>
-            <a 
-              href="https://wa.me/254726090372?text=Hi%20Poppies!%20I'd%20like%20to%20place%20an%20order."
+            <motion.a 
+              href={whatsappLink}
               target="_blank"
-              rel="noreferrer"
-              className="btn-primary w-full"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-primary w-full relative z-10 flex items-center justify-center gap-3 cursor-pointer"
             >
               Order on WhatsApp
-            </a>
+            </motion.a>
           </motion.div>
         </div>
       </div>

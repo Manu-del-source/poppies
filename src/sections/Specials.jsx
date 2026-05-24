@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OptimizedImage from '../components/OptimizedImage'
+import { MessageSquare } from 'lucide-react'
 
 const menuCategories = ['all', 'burgers', 'grill', 'specials', 'cocktails']
 
@@ -63,10 +64,16 @@ const menuItems = [
 
 const Specials = ({ id }) => {
   const [activeTab, setActiveTab] = useState('all')
+  const whatsappNumber = "254726090372"
 
   const filteredItems = activeTab === 'all' 
     ? menuItems 
     : menuItems.filter(item => item.category === activeTab)
+
+  const getWhatsappLink = (itemName) => {
+    const text = encodeURIComponent(`Hello, I'd like to order: ${itemName}`)
+    return `https://wa.me/${whatsappNumber}?text=${text}`
+  }
 
   return (
     <section id={id} className="py-32 bg-poppies-surface relative">
@@ -86,13 +93,15 @@ const Specials = ({ id }) => {
         {/* Categories Tabs */}
         <div className="flex justify-center flex-wrap gap-4 mb-16">
           {menuCategories.map((cat) => (
-            <button
+            <motion.button
               key={cat}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveTab(cat)}
-              className={`px-8 py-3 rounded-sm text-[0.7rem] uppercase tracking-widest font-bold transition-all duration-300 border ${activeTab === cat ? 'bg-poppies-accent border-poppies-accent text-white shadow-lg' : 'border-white/10 text-white/40 hover:border-poppies-accent/50'}`}
+              className={`px-8 py-3 rounded-sm text-[0.7rem] uppercase tracking-widest font-bold transition-all duration-300 border cursor-pointer ${activeTab === cat ? 'bg-poppies-accent border-poppies-accent text-white shadow-lg' : 'border-white/10 text-white/40 hover:border-poppies-accent/50'}`}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
         </div>
 
@@ -110,7 +119,7 @@ const Specials = ({ id }) => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.5 }}
-                className="glass-panel rounded-sm group overflow-hidden flex flex-col"
+                className="glass-panel rounded-sm group overflow-hidden flex flex-col border border-white/5 hover:border-poppies-accent/30 transition-colors"
               >
                 <div className="h-64 overflow-hidden relative">
                   <OptimizedImage 
@@ -127,14 +136,25 @@ const Specials = ({ id }) => {
                   </div>
                 </div>
                 
-                <div className="p-8 flex-grow">
+                <div className="p-8 flex-grow flex flex-col">
                   <div className="flex justify-between items-baseline mb-4">
                     <h3 className="text-xl font-black uppercase tracking-tight group-hover:text-poppies-accent transition-colors">{item.name}</h3>
                     <span className="text-poppies-accent font-bold text-sm whitespace-nowrap">{item.price}</span>
                   </div>
-                  <p className="text-poppies-secondary/60 text-sm leading-relaxed font-light mb-6">
+                  <p className="text-poppies-secondary/60 text-sm leading-relaxed font-light mb-8 flex-grow">
                     {item.desc}
                   </p>
+                  
+                  <motion.a
+                    href={getWhatsappLink(item.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-center justify-center gap-2 w-full py-4 border border-poppies-accent/50 text-poppies-accent font-bold uppercase tracking-widest text-[0.7rem] hover:bg-poppies-accent hover:text-white transition-all duration-300 rounded-sm"
+                  >
+                    <MessageSquare size={14} /> Order Now
+                  </motion.a>
                 </div>
               </motion.div>
             ))}

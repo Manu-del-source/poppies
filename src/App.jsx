@@ -35,7 +35,7 @@ function App() {
       <SpecialWidget />
       
       <main>
-        <Hero id="home" />
+        <Hero id="home" onBookClick={() => setIsBookingOpen(true)} />
         <Featured id="featured" />
         <About id="about" />
         <Specials id="specials" />
