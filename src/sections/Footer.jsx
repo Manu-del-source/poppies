@@ -55,9 +55,9 @@ const Footer = () => {
             <h4 className="text-[0.7rem] uppercase tracking-widest text-white/80 font-bold mb-8">Navigation</h4>
             <ul className="space-y-4 text-sm text-poppies-secondary/40">
               <li><a href="#home" className="hover:text-poppies-accent transition-colors cursor-pointer">Home</a></li>
-              <li><a href="#featured" className="hover:text-poppies-accent transition-colors cursor-pointer">Featured</a></li>
+              <li><a href="#specials" className="hover:text-poppies-accent transition-colors cursor-pointer">Specials</a></li>
               <li><a href="#about" className="hover:text-poppies-accent transition-colors cursor-pointer">Our Story</a></li>
-              <li><a href="#specials" className="hover:text-poppies-accent transition-colors cursor-pointer">Menu</a></li>
+              <li><a href="#menu" className="hover:text-poppies-accent transition-colors cursor-pointer">Menu</a></li>
             </ul>
           </div>
 

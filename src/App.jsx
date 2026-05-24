@@ -36,9 +36,9 @@ function App() {
       
       <main>
         <Hero id="home" onBookClick={() => setIsBookingOpen(true)} />
-        <Featured id="featured" />
+        <Featured id="specials" />
         <About id="about" />
-        <Specials id="specials" />
+        <Specials id="menu" />
         <Gallery id="gallery" />
         <Reviews id="reviews" />
         <Contact id="contact" />
