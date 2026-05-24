@@ -4,8 +4,8 @@ import OptimizedImage from '../components/OptimizedImage'
 
 const galleryImages = [
   { url: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=800', title: 'Industrial Elegance' },
-  { url: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=800', title: 'Artisan Plates' },
-  { url: 'https://images.unsplash.com/photo-1550966841-396ad88675c7?auto=format&fit=crop&q=80&w=800', title: 'Intimate Evenings' },
+  { url: 'https://images.unsplash.com/photo-1550966841-396ad88675c7?auto=format&fit=crop&q=80&w=800', title: 'Artisan Plates' },
+  { url: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=800', title: 'Intimate Evenings' },
   { url: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800', title: 'Culinary Mastery' },
   { url: 'https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&q=80&w=800', title: 'Signature Sips' },
   { url: 'https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&q=80&w=800', title: 'Urban Escape' }
