@@ -18,7 +18,6 @@ const Navbar = ({ onBookClick }) => {
   const [activeSection, setActiveSection] = useState('home')
 
   const scrollToSection = (sectionId) => {
-    console.log(`NAVIGATING TO: ${sectionId}`);
     const element = document.getElementById(sectionId);
     if (element) {
       setMobileMenuOpen(false);
@@ -33,6 +32,14 @@ const Navbar = ({ onBookClick }) => {
       console.error(`SECTION NOT FOUND: ${sectionId}`);
     }
   }
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,14 +68,16 @@ const Navbar = ({ onBookClick }) => {
   return (
     <nav className={`fixed top-0 w-full z-[5000] transition-all duration-500 ${scrolled ? 'py-4 bg-black/90 backdrop-blur-lg border-b border-white/5 shadow-2xl' : 'py-8 bg-transparent'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <motion.div 
+        <motion.button
+          type="button"
+          aria-label="Poppies home"
           onClick={() => scrollToSection('home')}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="text-2xl font-clash font-black tracking-tighter text-poppies-accent cursor-pointer z-[5001]"
         >
           POPPIES
-        </motion.div>
+        </motion.button>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex gap-10 items-center">
@@ -106,6 +115,8 @@ const Navbar = ({ onBookClick }) => {
           className="lg:hidden text-white p-2 cursor-pointer z-[5002] relative" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </motion.button>
@@ -119,6 +130,7 @@ const Navbar = ({ onBookClick }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            id="mobile-navigation"
             className="fixed inset-0 lg:hidden bg-black z-[4999] flex flex-col items-center justify-center gap-8"
           >
             <div className="flex flex-col items-center gap-8">

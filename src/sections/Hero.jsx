@@ -53,7 +53,7 @@ const Hero = ({ id, onBookClick }) => {
               Book Your Table
             </motion.button>
             <motion.a 
-              href="#specials"
+              href="#menu"
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.05)' }}
               whileTap={{ scale: 0.95 }}
               className="border border-white/20 text-white py-5 px-10 rounded-sm font-bold uppercase tracking-[3px] text-[0.8rem] transition-all flex items-center justify-center cursor-pointer hover:border-poppies-accent hover:text-poppies-accent"
@@ -66,7 +66,7 @@ const Hero = ({ id, onBookClick }) => {
 
       {/* Scroll Indicator */}
       <motion.a 
-        href="#featured"
+        href="#specials"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
