@@ -1,68 +1,66 @@
-# Poppies — Urban Dining Website
+# Poppies
 
-Poppies is a restaurant website concept for an urban dining experience in Nairobi. It is built as a client-side React application with Vite, Tailwind CSS, and Framer Motion.
+Poppies is a restaurant website concept for an urban dining spot in Nairobi, built as a single-page React app. It is a frontend prototype: the content is placeholder-level and the reservation form does not send anything to a backend.
 
-The interface includes a cinematic landing section, featured dishes, a filterable menu, restaurant information, a gallery, reviews, contact details, and a reservation modal.
+## What is on the page
 
-> **Status:** This repository currently contains a frontend prototype. The reservation form simulates submission in the browser; it does not send a booking to a backend or guarantee a table. Menu items, prices, contact details, reviews, and promotional content should be verified with the restaurant before the site is used commercially.
+- Hero section, featured dishes, a filterable menu, specials, about, gallery, reviews, contact and footer.
+- A reservation modal (date, time, guests). It simulates submission in the browser only.
+- Animated scroll progress, a custom cursor (disabled under reduced-motion preferences), and a navbar that works with keyboard navigation.
 
-## Features
+## Stack
 
-- Responsive, dark visual design with orange accents.
-- Section-based navigation and animated scroll progress.
-- Client-side menu category filtering.
-- Animated reservation modal with date, time, and guest fields.
-- Gallery, reviews, restaurant information, and contact sections.
-- Motion effects built with Framer Motion and icons from Lucide React.
-
-## Tech stack
-
-- React 18
-- Vite 5
-- Tailwind CSS 3
-- Framer Motion
-- Lucide React
+- React 18 (`react`, `react-dom`)
+- Vite 5 (dev server and build)
+- Tailwind CSS 3 with PostCSS and Autoprefixer
+- Framer Motion 11 for animation
+- Lucide React for icons
 
 ## Run locally
 
-Requirements: Node.js and npm.
+Requires Node.js and npm.
 
-```bash
-git clone https://github.com/Manu-del-source/poppies.git
-cd poppies
-npm install
-npm run dev
-```
+    git clone https://github.com/Manu-del-source/poppies.git
+    cd poppies
+    npm install
+    npm run dev
 
-Vite prints the local development URL in the terminal after the server starts.
+Vite prints the local URL (usually http://localhost:5173) when the server starts.
 
-## Production build
+To build and preview the production bundle:
 
-```bash
-npm run build
-npm run preview
-```
+    npm run build
+    npm run preview
 
-The build output is generated in `dist/`.
+Output goes to `dist/`.
 
 ## Project structure
 
-```text
-src/
-  components/   Shared UI such as navigation and the reservation modal
-  sections/     Page sections including hero, featured dishes, menu, gallery, and contact
-  App.jsx       Page composition and shared booking-modal state
-  index.css     Global styles
-```
+    src/
+      main.jsx          entry point
+      App.jsx           page composition and shared reservation-modal state
+      index.css         global styles
+      components/       Navbar, ReservationModal, CustomCursor, OptimizedImage, SpecialWidget
+      sections/         Hero, Featured, Specials, About, Gallery, Reviews, Contact, Footer
 
-## Before using this as a live restaurant website
+`README.md.bak` and `index.html.bak` are leftover backup copies and are not used by the app.
 
-- Connect the reservation form to a real booking API or a monitored contact workflow.
-- Replace prototype menu data, prices, imagery, reviews, and contact details with approved information.
-- Test keyboard navigation, dialog focus handling, reduced-motion preferences, and mobile layouts.
-- Add current screenshots or a short GIF of the running application to this README.
-- Run the production build and manually verify the site in desktop and mobile browsers.
+## Screenshots
+
+[SCREENSHOT PLACEHOLDER: hero section, desktop 1440px wide]
+
+[SCREENSHOT PLACEHOLDER: menu section with category filter, mobile 390px wide]
+
+[SCREENSHOT PLACEHOLDER: reservation modal open]
+
+[GIF PLACEHOLDER: scroll through the page]
+
+## Known limitations
+
+- The reservation form does not send bookings anywhere. A real booking API or a monitored contact workflow is needed before use.
+- Menu items, prices, reviews, imagery (currently Unsplash URLs in the hero) and contact details are placeholders and must be replaced with information approved by the restaurant.
+- Keyboard focus handling in the modal, reduced-motion behaviour and mobile layouts should be tested by hand. No automated tests are included.
 
 ## License
 
-No license file is currently included. Contact the repository owner before reusing this project.
+No license file is included in this repository. Ask the owner before reusing the code.
