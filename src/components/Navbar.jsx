@@ -18,7 +18,6 @@ const Navbar = ({ onBookClick }) => {
   const [activeSection, setActiveSection] = useState('home')
 
   const scrollToSection = (sectionId) => {
-    console.log(`NAVIGATING TO: ${sectionId}`);
     const element = document.getElementById(sectionId);
     if (element) {
       setMobileMenuOpen(false);
@@ -106,6 +105,7 @@ const Navbar = ({ onBookClick }) => {
           className="lg:hidden text-white p-2 cursor-pointer z-[5002] relative" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
         </motion.button>
